@@ -1,7 +1,8 @@
 import { useState } from 'react';
-
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ShortId from 'shortid';
+import { addContact } from '../../redux/actions/contacts-actions';
 
 function ContactInput({ onSubmit }) {
   const [name, setName] = useState('');
@@ -77,4 +78,8 @@ ContactInput.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
 
-export default ContactInput;
+const mapDispatchToProps = dispatch => ({
+  onSubmit: number => dispatch(addContact(number)),
+});
+
+export default connect(null, mapDispatchToProps)(ContactInput);

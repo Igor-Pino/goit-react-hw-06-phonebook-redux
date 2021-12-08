@@ -1,4 +1,7 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
+import { filterChange } from '../../redux/actions/contacts-actions';
 import s from './ContactFilter.module.scss';
 
 const Filter = ({ value, onChange }) => {
@@ -10,9 +13,17 @@ const Filter = ({ value, onChange }) => {
   );
 };
 
-Filter.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-};
+// Filter.propTypes = {
+//   value: PropTypes.string.isRequired,
+//   onChange: PropTypes.func.isRequired,
+// };
 
-export default Filter;
+const mapStateToProps = state => ({
+  value: state.contactBook.filter,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onChange: e => dispatch(filterChange(e.target.value)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);
