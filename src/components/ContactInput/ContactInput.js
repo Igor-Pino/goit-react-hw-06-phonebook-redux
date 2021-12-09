@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import ShortId from 'shortid';
 import { addContact } from '../../redux/actions/contacts-actions';
 
-function ContactInput({ onSubmit }) {
+function ContactInput() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -15,9 +15,9 @@ function ContactInput({ onSubmit }) {
 
   const stateContacts = useSelector(state => state.contactBook.contacts);
 
-  // const dispatch = useSelector();
+  const dispatch = useDispatch();
 
-  // const onSubmit = () => dispatch(addContact(number));
+  const onSubmit = () => dispatch(addContact(inputContact));
 
   const reset = () => {
     setName('');
@@ -52,7 +52,7 @@ function ContactInput({ onSubmit }) {
 
   const handelSubmit = e => {
     e.preventDefault();
-    console.log(stateContacts);
+
     compareContacts(inputContact);
 
     reset();
@@ -100,8 +100,10 @@ ContactInput.propTypes = {
 
 // })
 
-const mapDispatchToProps = dispatch => ({
-  onSubmit: number => dispatch(addContact(number)),
-});
+// const mapDispatchToProps = dispatch => ({
+//   onSubmit: newContact => dispatch(addContact(newContact)),
+// });
 
-export default connect(null, mapDispatchToProps)(ContactInput);
+// export default connect(null, mapDispatchToProps)(ContactInput);
+
+export default ContactInput;
