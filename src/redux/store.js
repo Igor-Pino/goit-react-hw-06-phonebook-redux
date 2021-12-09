@@ -1,4 +1,4 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 
 import {
   persistStore,
@@ -14,19 +14,16 @@ import storage from 'redux-persist/lib/storage';
 import contactBookReducer from './reducers/contacrBookReducer';
 import logger from 'redux-logger';
 
-const persistConfig = {
-  key: 'root',
+const contactsPersistConfig = {
+  key: 'contacts',
   storage,
+  blacklist: ['filter'],
 };
 
-const rootReducer = combineReducers({
-  contactBook: contactBookReducer,
-});
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
 const store = configureStore({
-  reducer: persistedReducer,
+  reducer: {
+    contactBook: persistReducer(contactsPersistConfig, contactBookReducer),
+  },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {

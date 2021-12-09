@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import ShortId from 'shortid';
 import { addContact } from '../../redux/actions/contacts-actions';
@@ -11,7 +11,13 @@ function ContactInput({ onSubmit }) {
   const nameInputId = ShortId.generate();
   const numberInputId = ShortId.generate();
 
-  const state = { name, number };
+  const inputContact = { name, number };
+
+  const stateContacts = useSelector(state => state.contactBook.contacts);
+
+  // const dispatch = useSelector();
+
+  // const onSubmit = () => dispatch(addContact(number));
 
   const reset = () => {
     setName('');
@@ -34,10 +40,21 @@ function ContactInput({ onSubmit }) {
     }
   };
 
+  const compareContacts = newContact => {
+    if (
+      stateContacts.find(contact => contact.name.toLowerCase() === newContact.name.toLowerCase())
+    ) {
+      alert(`${newContact.name} is already in contacts!`);
+      return;
+    }
+    onSubmit(newContact);
+  };
+
   const handelSubmit = e => {
     e.preventDefault();
+    console.log(stateContacts);
+    compareContacts(inputContact);
 
-    onSubmit(state);
     reset();
   };
 
@@ -74,19 +91,14 @@ function ContactInput({ onSubmit }) {
   );
 }
 
-// const compareNumber = ({name, number}) =>  {
-//   if (
-//     contacts.find(contact => contact.name.toLowerCase() === name.toLowerCase()) ||
-//     contacts.find(contact => contact.number === number)
-//   ) {
-//     alert(`${name} is already in contacts!`);
-//     return;
-//   }
-// }
-
 ContactInput.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
+
+// const mapStateToProps = state => ({
+// stateContacts: state.contactBook.contacts,
+
+// })
 
 const mapDispatchToProps = dispatch => ({
   onSubmit: number => dispatch(addContact(number)),
