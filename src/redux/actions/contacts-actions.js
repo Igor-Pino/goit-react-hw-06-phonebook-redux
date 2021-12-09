@@ -40,3 +40,4 @@ export { addContact, deleteContact, filterChange };
 //   type: CHANGE_FILTER,
 //   payload: value,
 // });
+// комент
