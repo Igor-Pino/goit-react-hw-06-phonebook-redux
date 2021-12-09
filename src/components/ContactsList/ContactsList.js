@@ -32,6 +32,10 @@ ContactsList.propTypes = {
   onDeleteContact: PropTypes.func.isRequired,
 };
 
+ContactsList.defaultProps = {
+  contacts: [],
+};
+
 const contactFilter = (allcontacts, filter) => {
   const normalizedFilter = filter.toLowerCase();
   const filteredContacts = allcontacts.filter(contact =>
@@ -49,7 +53,6 @@ const mapStateToProps = state => {
     contacts: filteredNumbers,
   };
 };
-
 const mapDispatchToProps = dispatch => ({
   onDeleteContact: id => dispatch(deleteContact(id)),
 });

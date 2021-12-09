@@ -74,6 +74,16 @@ function ContactInput({ onSubmit }) {
   );
 }
 
+// const compareNumber = ({name, number}) =>  {
+//   if (
+//     contacts.find(contact => contact.name.toLowerCase() === name.toLowerCase()) ||
+//     contacts.find(contact => contact.number === number)
+//   ) {
+//     alert(`${name} is already in contacts!`);
+//     return;
+//   }
+// }
+
 ContactInput.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
