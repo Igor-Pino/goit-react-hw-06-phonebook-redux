@@ -1,29 +1,19 @@
-// import PropTypes from 'prop-types';
-
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { filterChange } from '../../redux/actions/contacts-actions';
+import { getFilter } from '../../redux/PhoneBook-selectors';
 import s from './ContactFilter.module.scss';
 
-const Filter = ({ value, onChange }) => {
+const Filter = () => {
+  const dispatch = useDispatch();
+  const onChange = e => dispatch(filterChange(e.target.value));
+  const filterValue = useSelector(getFilter);
+
   return (
     <label>
       <span className={s.filter_label}>Contact filter</span>
-      <input type="text" name="filter" value={value} onChange={onChange} />
+      <input type="text" name="filter" value={filterValue} onChange={onChange} />
     </label>
   );
 };
 
-// Filter.propTypes = {
-//   value: PropTypes.string.isRequired,
-//   onChange: PropTypes.func.isRequired,
-// };
-
-const mapStateToProps = state => ({
-  value: state.contactBook.filter,
-});
-
-const mapDispatchToProps = dispatch => ({
-  onChange: e => dispatch(filterChange(e.target.value)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default Filter;

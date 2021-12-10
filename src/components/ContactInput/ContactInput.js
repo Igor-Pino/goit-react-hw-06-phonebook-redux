@@ -95,15 +95,4 @@ ContactInput.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
 
-// const mapStateToProps = state => ({
-// stateContacts: state.contactBook.contacts,
-
-// })
-
-// const mapDispatchToProps = dispatch => ({
-//   onSubmit: newContact => dispatch(addContact(newContact)),
-// });
-
-// export default connect(null, mapDispatchToProps)(ContactInput);
-
 export default ContactInput;
