@@ -37,5 +37,3 @@ const store = configureStore({
 const persistor = persistStore(store);
 
 export { store, persistor };
-
-// const store = createStore(rootReducer, composeWithDevTools());
